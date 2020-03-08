@@ -8,7 +8,7 @@ import java.awt.geom.Area;
 
 import static Packij.Constants.*;
 
-public class IncomingRon extends GameObject implements Ronnable {
+public class IncomingRon extends GameObject {
 
     int karmaValue;
 
@@ -21,6 +21,12 @@ public class IncomingRon extends GameObject implements Ronnable {
     boolean downron;
 
     double angleToMiddle;
+
+    boolean xIntersect;
+    boolean yIntersect;
+
+
+    Rectangle hitBounds;
 
 
     IncomingRon() {
@@ -40,6 +46,11 @@ public class IncomingRon extends GameObject implements Ronnable {
         //position = Vector2D.randomVectorFromVector(MIDDLE_VECTOR, 1024, 1536);
         //angleToMiddle = angle;
         position = p;
+        dead = false;
+
+        xIntersect = (position.x > HALF_WIDTH);
+        yIntersect = (position.y > HALF_HEIGHT);
+
         distance = position.dist(MIDDLE_VECTOR);
         velocity = Vector2D.polar(angle,Math.random()*MAX_SPEED+100);
 
@@ -48,25 +59,32 @@ public class IncomingRon extends GameObject implements Ronnable {
         objRect = new Rectangle(-16,0,32,32);
 
         hitArea = new Area(objRect);
+        hitBounds = hitArea.getBounds();
 
-        karmaValue = (int)(Math.random() * 16)+1;
+        karmaValue = (int)(Math.random() * 32)+1;
 
         if (Math.random() > 0.5){
             img = UPRON;
             downron = false;
         } else{
             img = DOWNRON;
-            karmaValue = -karmaValue;
+            karmaValue *= -1;
             downron = true;
         }
     }
 
+
+    /*
     public void update(){
-        super.update();
-        if (position.getAngleBetween(MIDDLE_VECTOR) != angleToMiddle){
-            System.out.println("oh dear");
-            dead = true;
-        }
+
+    }*/
+
+    public void braved(){
+        dead = true;
+    }
+
+    private boolean intersectedMiddle(){
+        return (xIntersect != (position.x > HALF_WIDTH) || yIntersect != (position.y > HALF_HEIGHT));
     }
 
     @Override
@@ -74,17 +92,21 @@ public class IncomingRon extends GameObject implements Ronnable {
         AffineTransform at = g.getTransform();
         g.translate(position.x,position.y);
         double rot = velocity.angle() + Math.PI / 2;
-        if (downron){
-            rot += Math.PI;
-        }
         g.rotate(rot);
-        //g.translate(0, position.dist(MIDDLE_VECTOR));
         g.drawImage(img,-16,0,32,32,null);
+        hitArea = new Area(g.getTransform().createTransformedShape(objRect));
+        hitBounds = hitArea.getBounds();
         g.setTransform(at);
+        //g.setColor(Color.cyan);
+        //g.fill(hitArea);
     }
 
-    @Override
-    public boolean intersects(Area a) {
-        return false;
+    public Rectangle getBounds(){
+        return hitBounds;
     }
+
+    public Area getArea(){
+        return hitArea;
+    }
+
 }

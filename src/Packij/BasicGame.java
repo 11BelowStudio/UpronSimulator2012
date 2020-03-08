@@ -27,7 +27,6 @@ public abstract class BasicGame {
 
     protected void thisIsGettingVerySilly(){
         stopThis = true;
-        gameOver = true;
     }
 
     public void clicked(Point clickLocation){
@@ -66,6 +65,10 @@ public abstract class BasicGame {
         }
 
 
+
+    }
+
+    public void mouseMoved(Point location){
 
     }
 

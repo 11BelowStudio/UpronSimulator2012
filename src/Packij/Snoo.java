@@ -4,10 +4,12 @@ import utilities.Vector2D;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 
 import static Packij.Constants.*;
 
-public class Snoo extends GameObject {
+public class Snoo extends GameObject implements Ronnable {
 
     //int radius;
 
@@ -21,6 +23,10 @@ public class Snoo extends GameObject {
 
     String karmaString;
 
+    Rectangle hitBounds;
+
+    Area currentArea;
+
 
     public Snoo(){
         super(new Vector2D(HALF_WIDTH,HALF_HEIGHT),new Vector2D());
@@ -30,6 +36,11 @@ public class Snoo extends GameObject {
         karmaDecay = 5;
 
         karmaString = String.valueOf(karma);
+
+
+        hitArea = new Area(new Ellipse2D.Double(position.x-karma,position.y-karma,2*karma, 2*karma));
+
+        hitBounds = hitArea.getBounds();
 
         //objRect = new Rectangle((int)position.x - health, (int)position.y-health,2*health,2*health);
 
@@ -57,11 +68,32 @@ public class Snoo extends GameObject {
             karmaDecay = 5;
         }
 
-        if (karma == 0){
+        if (karma < 1){
             dead = true;
         }
-        karmaString = String.valueOf(karma);
+        updateArea();
 
+    }
+
+    private void updateKarma(int karmaChange){
+
+        karma += karmaChange;
+        if (karma > 256){
+            karma = 256;
+        }
+
+        updateArea();
+    }
+
+    private void updateArea(){
+        if (karma > 0) {
+            hitArea = new Area(new Ellipse2D.Double(position.x - karma, position.y - karma, 2 * karma, 2 * karma));
+        } else{
+            hitArea = new Area(new Ellipse2D.Double(position.x - 1, position.y - 1, 2, 2));
+            dead = true;
+        }
+        hitBounds = hitArea.getBounds();
+        karmaString = String.valueOf(karma);
     }
 
     public int getKarma(){
@@ -72,6 +104,10 @@ public class Snoo extends GameObject {
     public void draw(Graphics2D g) {
 
         AffineTransform at = g.getTransform();
+
+        //g.setPaint(Color.cyan);
+        //g.fill(hitArea);
+
         g.translate(position.x,position.y);
         //g.setPaint(new TexturePaint(BUF_SNOO,objRect));
         //g.fillOval
@@ -82,7 +118,25 @@ public class Snoo extends GameObject {
         int h = metrics.getHeight();
         g.setColor(Color.white);
         g.drawString(karmaString,0-(w/2),karma+h);
-
         g.setTransform(at);
+        /*
+        g.fill(hitBounds);
+        g.setColor(Color.lightGray);
+        g.fill(hitArea);*/
+    }
+
+    @Override
+    public boolean ronned(IncomingRon ron) {
+        if (hitBounds.intersects(ron.getBounds())){
+            Area temp = hitArea;
+            temp.intersect(ron.getArea());
+            if (!temp.isEmpty()){
+                updateKarma(ron.karmaValue);
+                ron.braved();
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 }

@@ -9,11 +9,15 @@ public class BasicView extends JComponent {
 
     private BasicGame game;
 
+    MouseListener mouseListener;
+
 
 
     public BasicView(BasicGame game) throws InterruptedException {
         this.game = game;
-        this.addMouseListener(new MouseClickListener());
+        mouseListener = new MouseListener();
+        this.addMouseListener(mouseListener);
+        this.addMouseMotionListener(mouseListener);
 
     }
 
@@ -57,6 +61,8 @@ public class BasicView extends JComponent {
     public void clicked(Point clickLocation){
         game.clicked(clickLocation);
     }
+
+    public void mouseMoved(Point mouseLocation) {game.mouseMoved(mouseLocation);}
 
     @Override
     public Dimension getPreferredSize() {

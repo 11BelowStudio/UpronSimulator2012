@@ -34,7 +34,7 @@ public class JEasyFrame extends JFrame {
             int missedFrames = 0;
             boolean isIntro = true;
             while (true) {
-                while (!game.gameOver) {
+                while (!game.stopThis) {
                     long t0 = System.currentTimeMillis();
                     game.update();
                     long t1 = System.currentTimeMillis();

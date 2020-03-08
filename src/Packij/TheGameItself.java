@@ -2,19 +2,27 @@ package Packij;
 
 import utilities.Vector2D;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-import static Packij.Constants.MIDDLE_VECTOR;
+import static Packij.Constants.*;
 
 public class TheGameItself extends BasicGame {
 
     Snoo snoo;
 
+    BraveryStick braveryStick;
+
     int survivedFor;
 
     Stack<IncomingRon> rons;
+
+    StringObject score;
+
+    int timeToUpdateScore;
 
 
     TheGameItself(){
@@ -28,10 +36,18 @@ public class TheGameItself extends BasicGame {
             rons.add(new IncomingRon());
         }
 
-        objectList.add(snoo);
+        objectList.add(braveryStick = new BraveryStick());
 
-        objectList.add(new MiddleCircle());
-        objectList.add(new MiddleCircle(true));
+        objectList.add(snoo = new Snoo());
+
+        objectList.add(score = new StringObject(new Vector2D(HALF_WIDTH,20),new Vector2D(),String.valueOf(survivedFor)));
+
+        timeToUpdateScore = DELAY;
+
+
+
+        //objectList.add(new MiddleCircle());
+        //objectList.add(new MiddleCircle(true));
     }
 
 
@@ -46,10 +62,9 @@ public class TheGameItself extends BasicGame {
 
 
         for (GameObject o : objectList) {
-            o.update();
 
-            if (o instanceof IncomingRon){
-            }
+
+            o.update();
 
 
             if (o.dead){
@@ -62,10 +77,27 @@ public class TheGameItself extends BasicGame {
             //basically calls the draw method of each gameObject
         }
 
+        for (GameObject a: aliveList){
+            if (a instanceof IncomingRon){
+                if (snoo.ronned((IncomingRon) a) || braveryStick.ronned((IncomingRon) a)){
+                    a.dead = true;
+                }
+            }
+        }
+
         if (snoo.dead){
-            gameOver = true;
+            uLostLol();
         } else{
             survivedFor++;
+            score.showValue(survivedFor);
+            /*
+            if (timeToUpdateScore == 0) {
+                survivedFor++;
+                score.showValue(survivedFor);
+                timeToUpdateScore = DELAY;
+            } else{
+                timeToUpdateScore--;
+            }*/
         }
 
         //}
@@ -73,19 +105,21 @@ public class TheGameItself extends BasicGame {
         for (GameObject d: dedList) {
             if (d instanceof IncomingRon){
                 rons.push((IncomingRon) d);
+                System.out.println("ron back in stack");
             }
 
         }
 
 
         if (!rons.isEmpty()) {
-            if (Math.random() > 0.75) {
+            if (Math.random() > 0.85) {
                 IncomingRon newRon = rons.pop();
                 Vector2D newRonOffset = Vector2D.polar(Math.toRadians(Math.random() * 360), (Math.random() * 1024) + 512);
                 Vector2D newRonLocation = new Vector2D(newRonOffset).add(MIDDLE_VECTOR);
                 double ronAngle = newRonOffset.flip().angle();
                 newRon.ronPaulCanStillWin(newRonLocation, ronAngle);
                 aliveList.add(newRon);
+                System.out.println("another ron bites the ron");
             }
         }
 
@@ -96,6 +130,16 @@ public class TheGameItself extends BasicGame {
 
 
 
+    }
+
+    protected void uLostLol(){
+        gameOver = true;
+        JOptionPane.showMessageDialog(null,"Ron \"Ron Paul\" Paul can still win!");
+        thisIsGettingVerySilly();
+    }
+
+    public void mouseMoved(Point location){
+        braveryStick.setMouseLocation(location);
     }
 
     //}

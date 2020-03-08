@@ -33,6 +33,10 @@ public class StringObject extends GameObject {
         g.setTransform(at);
     }
 
+    public void showValue(int value){
+        thisString = String.valueOf(value);
+    }
+
 
     @Override
     public void update(){

@@ -25,20 +25,20 @@ public class Constants {
     public static final int MAX_SPEED = 200;
 
 
-    public static Image UPRON, DOWNRON, SNOO, BRAVERYSTICK, BRAVERYSTICK180;
-    public static BufferedImage BUF_UPRON, BUF_DOWNRON, BUF_SNOO, BUF_BRAVERYSTICK, BUF_BRAVERYSTICK180;
+    public static Image UPRON, DOWNRON, SNOO, BRAVERYSTICK, BRAVERYSTICKFLIPPED;
+    //public static BufferedImage BUF_UPRON, BUF_DOWNRON, BUF_SNOO, BUF_BRAVERYSTICK, BUF_BRAVERYSTICKFLIPPED;
     static {
         try {
             UPRON = ImageManager.loadImage("upvote");
-            BUF_UPRON = ImageManager.loadBufferedImage("upvote");
+            //BUF_UPRON = ImageManager.loadBufferedImage("upvote");
             DOWNRON = ImageManager.loadImage("downvote");
-            BUF_DOWNRON = ImageManager.loadBufferedImage("downvote");
+            //BUF_DOWNRON = ImageManager.loadBufferedImage("downvote");
             SNOO = ImageManager.loadImage("snoo");
-            BUF_SNOO = ImageManager.loadBufferedImage("snoo");
+            //BUF_SNOO = ImageManager.loadBufferedImage("snoo");
             BRAVERYSTICK = ImageManager.loadImage("BraveryStick");
-            BUF_BRAVERYSTICK = ImageManager.loadBufferedImage("BraveryStick");
-            BRAVERYSTICK180 = ImageManager.loadImage("BraveryStick180");
-            BUF_BRAVERYSTICK180 = ImageManager.loadBufferedImage("BraveryStick180");
+            //BUF_BRAVERYSTICK = ImageManager.loadBufferedImage("BraveryStick");
+            BRAVERYSTICKFLIPPED = ImageManager.loadImage("BraveryStickFlipped");
+            //BUF_BRAVERYSTICKFLIPPED = ImageManager.loadBufferedImage("BraveryStickFlipped");
         } catch (IOException e) {
             e.printStackTrace();
         }

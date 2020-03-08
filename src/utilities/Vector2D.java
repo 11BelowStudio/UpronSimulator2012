@@ -1,5 +1,7 @@
 package utilities;
 
+import java.awt.*;
+
 // mutable 2D vectors
 public final class Vector2D {
     public double x, y;
@@ -245,6 +247,19 @@ public final class Vector2D {
         x *= -1;
         y *= -1;
         return this;
+    }
+
+    public Point toPoint(){
+        return new Point((int)x,(int)y);
+    }
+
+    public Vector2D(Point p){
+        this.x = p.x;
+        this.y = p.y;
+    }
+
+    public static Vector2D originToPoint(Vector2D v, Point p){
+        return v.getVectorBetween(new Vector2D(p));
     }
 
 }
