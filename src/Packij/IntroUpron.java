@@ -11,9 +11,9 @@ public class IntroUpron extends GameObject {
 
     private Rectangle upronArea;
 
-    public int upronCount;
+    int upronCount;
 
-    public IntroUpron() {
+    IntroUpron() {
         super(new Vector2D(HALF_WIDTH,HALF_HEIGHT),new Vector2D());
 
         upronArea = new Rectangle((int)(position.x - 256),(int)(position.y - 256),512,512);
@@ -21,7 +21,7 @@ public class IntroUpron extends GameObject {
         upronCount = 0;
 
         img = UPRON;
-        //img = SNOO;
+
 
     }
 
@@ -35,7 +35,7 @@ public class IntroUpron extends GameObject {
 
 
 
-    public void upron(Point upronLocation){
+    void upron(Point upronLocation){
         if(upronArea.contains(upronLocation)) {
             System.out.println("So brave!");
             upronCount++;

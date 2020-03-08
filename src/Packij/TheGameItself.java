@@ -2,7 +2,6 @@ package Packij;
 
 import utilities.Vector2D;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -11,19 +10,18 @@ import static Packij.Constants.*;
 
 public class TheGameItself extends BasicGame {
 
-    Snoo snoo;
+    private Snoo snoo;
 
-    BraveryStick braveryStick;
+    private BraveryStick braveryStick;
 
-    int survivedFor;
+    private int survivedFor;
 
-    Stack<IncomingRon> rons;
+    private Stack<IncomingRon> rons;
 
-    StringObject score;
+    private StringObject score;
 
-    int timeToUpdateScore;
 
-    HighScoreHandler highscores;
+    private HighScoreHandler highscores;
 
 
     TheGameItself(HighScoreHandler highscores){
@@ -45,7 +43,6 @@ public class TheGameItself extends BasicGame {
 
         objectList.add(score = new StringObject(new Vector2D(HALF_WIDTH,20),new Vector2D(),String.valueOf(survivedFor)));
 
-        timeToUpdateScore = DELAY;
 
     }
 
@@ -56,7 +53,6 @@ public class TheGameItself extends BasicGame {
         ArrayList<GameObject> aliveList = new ArrayList<>();
         ArrayList<GameObject> dedList = new ArrayList<>();
 
-        //synchronized (BasicGame.class) {
 
 
 
@@ -87,36 +83,24 @@ public class TheGameItself extends BasicGame {
         } else{
             survivedFor++;
             score.showValue(survivedFor);
-            /*
-            if (timeToUpdateScore == 0) {
-                survivedFor++;
-                score.showValue(survivedFor);
-                timeToUpdateScore = DELAY;
-            } else{
-                timeToUpdateScore--;
-            }*/
         }
-
-        //}
 
         for (GameObject d: dedList) {
             if (d instanceof IncomingRon){
                 rons.push((IncomingRon) d);
-                System.out.println("ron back in stack");
             }
 
         }
 
 
         if (!rons.isEmpty()) {
-            if (Math.random() > 0.85) {
+            if (Math.random() > 0.5) {
                 IncomingRon newRon = rons.pop();
                 Vector2D newRonOffset = Vector2D.polar(Math.toRadians(Math.random() * 360), (Math.random() * 1024) + 512);
                 Vector2D newRonLocation = new Vector2D(newRonOffset).add(MIDDLE_VECTOR);
                 double ronAngle = newRonOffset.flip().angle();
                 newRon.ronPaulCanStillWin(newRonLocation, ronAngle);
                 aliveList.add(newRon);
-                System.out.println("another ron bites the ron");
             }
         }
 

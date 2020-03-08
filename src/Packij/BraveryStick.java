@@ -10,27 +10,26 @@ import static Packij.Constants.*;
 
 public class BraveryStick extends GameObject implements Ronnable {
 
-    Image rightStick = BRAVERYSTICK;
-    Image leftStick = BRAVERYSTICKFLIPPED;
+    private Image rightStick = BRAVERYSTICK;
+    private Image leftStick = BRAVERYSTICKFLIPPED;
 
-    Vector2D mouseLocation;
-    double mouseAngle;
+    private Vector2D mouseLocation;
+    private double mouseAngle;
 
-    Rectangle hitBounds;
+    private Rectangle hitBounds;
 
-    Area currentArea;
+    private Area currentArea;
 
 
 
-    public BraveryStick(){
+    BraveryStick(){
         super(Vector2D.polar(Math.toRadians(270),128).add(MIDDLE_VECTOR),new Vector2D());
         objRect = new Rectangle(-96,-16,224,32);
 
         mouseLocation = new Vector2D(HALF_WIDTH,0);
         mouseAngle = Math.toRadians(270);
 
-        rightStick = BRAVERYSTICK;
-        leftStick = BRAVERYSTICKFLIPPED;
+
 
         hitArea = new Area(objRect);
         hitBounds = hitArea.getBounds();
@@ -40,7 +39,7 @@ public class BraveryStick extends GameObject implements Ronnable {
 
     }
 
-    public void setMouseLocation(Point location){
+    void setMouseLocation(Point location){
         mouseLocation = new Vector2D(location);
         //Vector2D distFromMiddle = MIDDLE_VECTOR.getVectorBetween(mouseLocation).setMag(128);
         //mouseAngle = distFromMiddle.angle();

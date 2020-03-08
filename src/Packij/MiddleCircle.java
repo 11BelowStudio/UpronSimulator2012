@@ -9,11 +9,13 @@ import static Packij.Constants.*;
 
 public class MiddleCircle extends GameObject {
 
-    Vector2D vectorPointingFromIt;
+    private Vector2D vectorPointingFromIt;
 
-    int timeUntilNextVectorFromIt;
+    private int timeUntilNextVectorFromIt;
 
-    boolean hmm;
+    //yeah this was just used for testing lol
+
+    private boolean hmm;
 
     MiddleCircle(){
         super(new Vector2D(HALF_WIDTH,HALF_HEIGHT),new Vector2D());

@@ -10,11 +10,8 @@ import static Packij.Constants.*;
 public class Intro extends BasicGame {
 
 
-    private boolean creditsOver;
-
     private StringObject startButtonString;
     private StringObject pressTheArrowString;
-    //private StringObject weDidItReddit;
 
     private IntroUpron upron;
 
@@ -55,7 +52,7 @@ public class Intro extends BasicGame {
             distFromBottom += 20;
         }
 
-        creditsOver = false;
+
         gameOver = false;
 
         clearWords = false;

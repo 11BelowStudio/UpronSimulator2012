@@ -15,26 +15,23 @@ public class Snoo extends GameObject implements Ronnable {
 
     //public Rectangle objRect = new Rectangle((int)position.x - 128, (int)position.y-128,256,256);
 
-    int karma;
+    private int karma;
 
-    int karmaDecay;
+    private int karmaDecay;
 
-    public boolean oneHit;
+    private String karmaString;
 
-    String karmaString;
+    private String soBrave;
 
-    String soBrave;
+    private String itsHappening;
 
-    String itsHappening;
+    private Rectangle hitBounds;
 
-    Rectangle hitBounds;
-
-    Area currentArea;
 
     private final Font epicFont = new Font("Impact", Font.BOLD,40);
 
 
-    public Snoo(){
+    Snoo(){
         super(new Vector2D(HALF_WIDTH,HALF_HEIGHT),new Vector2D());
 
         karma = 128;
@@ -48,32 +45,22 @@ public class Snoo extends GameObject implements Ronnable {
 
         hitBounds = hitArea.getBounds();
 
-        //objRect = new Rectangle((int)position.x - health, (int)position.y-health,2*health,2*health);
-
-        //health = 128;
-
         img = SNOO;
 
         soBrave = "So Brave!";
 
         itsHappening = "It's Happening!";
 
-        System.out.println("snoo made");
-
     }
 
     public void update() {
 
-        oneHit = false;
 
         if (karmaDecay > 0){
             karmaDecay--;
         } else if (karmaDecay == 0){
             if (karma > 1){
                 karma--;
-                if (karma == 1){
-                    oneHit = true;
-                }
             }
             karmaDecay = 5;
         }
@@ -103,21 +90,17 @@ public class Snoo extends GameObject implements Ronnable {
         karmaString = String.valueOf(karma);
     }
 
-    public int getKarma(){
+    /*
+    int getKarma(){
         return karma;
-    }
+    }*/
 
     @Override
     public void draw(Graphics2D g) {
 
         AffineTransform at = g.getTransform();
 
-        //g.setPaint(Color.cyan);
-        //g.fill(hitArea);
-
         g.translate(position.x,position.y);
-        //g.setPaint(new TexturePaint(BUF_SNOO,objRect));
-        //g.fillOval
         g.drawImage(img,-karma,-karma,2* karma,2* karma,null);
 
         hitArea = new Area(new Ellipse2D.Double(position.x-karma,position.y-karma,2*karma, 2*karma));
@@ -147,10 +130,6 @@ public class Snoo extends GameObject implements Ronnable {
         }
 
         g.setTransform(at);
-        /*
-        g.fill(hitBounds);
-        g.setColor(Color.lightGray);
-        g.fill(hitArea);*/
     }
 
     @Override

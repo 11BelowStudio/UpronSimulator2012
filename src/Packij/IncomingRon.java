@@ -12,21 +12,12 @@ public class IncomingRon extends GameObject {
 
     int karmaValue;
 
-    Image orangeArrow = Constants.UPRON;
 
-    Vector2D direction;
-
-    double distance;
-
-    boolean downron;
-
-    double angleToMiddle;
-
-    boolean xIntersect;
-    boolean yIntersect;
+    private boolean xIntersect;
+    private boolean yIntersect;
 
 
-    Rectangle hitBounds;
+    private Rectangle hitBounds;
 
 
     IncomingRon() {
@@ -42,18 +33,15 @@ public class IncomingRon extends GameObject {
         Vector2D.polar(Math.toRadians(Math.random() * 360), Math.random() * MAX_SPEED)*/
     }
 
-    public void ronPaulCanStillWin(Vector2D p, double angle){
-        //position = Vector2D.randomVectorFromVector(MIDDLE_VECTOR, 1024, 1536);
-        //angleToMiddle = angle;
+    void ronPaulCanStillWin(Vector2D p, double angle){
+
         position = p;
         dead = false;
 
         xIntersect = (position.x > HALF_WIDTH);
         yIntersect = (position.y > HALF_HEIGHT);
 
-        distance = position.dist(MIDDLE_VECTOR);
         velocity = Vector2D.polar(angle,Math.random()*MAX_SPEED+100);
-
 
 
         objRect = new Rectangle(-16,0,32,32);
@@ -65,24 +53,24 @@ public class IncomingRon extends GameObject {
 
         if (Math.random() > 0.5){
             img = UPRON;
-            downron = false;
+
         } else{
             img = DOWNRON;
             karmaValue *= -1;
-            downron = true;
         }
     }
 
 
 
 
-    public void braved(){
+    void braved(){
         dead = true;
     }
 
+    /*
     private boolean intersectedMiddle(){
         return (xIntersect != (position.x > HALF_WIDTH) || yIntersect != (position.y > HALF_HEIGHT));
-    }
+    }*/
 
     @Override
     public void draw(Graphics2D g) {
@@ -94,15 +82,13 @@ public class IncomingRon extends GameObject {
         hitArea = new Area(g.getTransform().createTransformedShape(objRect));
         hitBounds = hitArea.getBounds();
         g.setTransform(at);
-        //g.setColor(Color.cyan);
-        //g.fill(hitArea);
     }
 
-    public Rectangle getBounds(){
+    Rectangle getBounds(){
         return hitBounds;
     }
 
-    public Area getArea(){
+    Area getArea(){
         return hitArea;
     }
 

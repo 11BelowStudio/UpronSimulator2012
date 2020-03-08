@@ -7,14 +7,14 @@ import java.util.List;
 
 public abstract class BasicGame {
 
-    public List<GameObject> objectList;
+    List<GameObject> objectList;
 
-    public boolean gameOver;
+    boolean gameOver;
 
-    public boolean stopThis;
+    boolean stopThis;
 
 
-    public BasicGame(){
+    BasicGame(){
 
         objectList = new ArrayList<>();
         stopThis = false;
@@ -25,7 +25,7 @@ public abstract class BasicGame {
         gameOver = true;
     }
 
-    protected void thisIsGettingVerySilly(){
+    void thisIsGettingVerySilly(){
         stopThis = true;
     }
 
@@ -34,39 +34,7 @@ public abstract class BasicGame {
     }
 
 
-    public void update() {
-
-
-        ArrayList<GameObject> aliveList = new ArrayList<>();
-        ArrayList<GameObject> dedList = new ArrayList<>();
-
-        //synchronized (BasicGame.class) {
-
-
-
-
-        for (GameObject o : objectList) {
-            o.update();
-            if (o.dead){
-                dedList.add(o);
-
-            } else{
-                aliveList.add(o);
-            }
-
-            //o.drawBoundingRect(g);
-            //basically calls the draw method of each gameObject
-        }
-        //}
-
-        synchronized (BasicGame.class) {
-            objectList.clear();
-            objectList.addAll(aliveList);
-        }
-
-
-
-    }
+    public abstract void update();
 
     public void mouseMoved(Point location){
 

@@ -11,7 +11,7 @@ class HighScoreHandler {
 
     //pls note that everything in this is package-private or just private
 
-    Component parent;
+    private Component parent;
 
 
     private ArrayList<ScoreRecord> highScores;
@@ -172,7 +172,7 @@ class HighScoreHandler {
         );
     }
 
-    String scoresToString(){
+    private String scoresToString(){
         int i = 0;
         StringBuilder scoreString = new StringBuilder();
         while (i < 5){
