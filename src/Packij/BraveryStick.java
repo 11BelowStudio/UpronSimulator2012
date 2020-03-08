@@ -33,6 +33,7 @@ public class BraveryStick extends GameObject implements Ronnable {
         leftStick = BRAVERYSTICKFLIPPED;
 
         hitArea = new Area(objRect);
+        hitBounds = hitArea.getBounds();
 
         currentArea = hitArea;
 

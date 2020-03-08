@@ -5,7 +5,6 @@ import utilities.Vector2D;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Stack;
 
 import static Packij.Constants.*;
@@ -24,10 +23,14 @@ public class TheGameItself extends BasicGame {
 
     int timeToUpdateScore;
 
+    HighScoreHandler highscores;
 
-    TheGameItself(){
+
+    TheGameItself(HighScoreHandler highscores){
 
         snoo = new Snoo();
+
+        this.highscores = highscores;
 
         survivedFor = 0;
 
@@ -44,10 +47,6 @@ public class TheGameItself extends BasicGame {
 
         timeToUpdateScore = DELAY;
 
-
-
-        //objectList.add(new MiddleCircle());
-        //objectList.add(new MiddleCircle(true));
     }
 
 
@@ -73,8 +72,6 @@ public class TheGameItself extends BasicGame {
                 aliveList.add(o);
             }
 
-            //o.drawBoundingRect(g);
-            //basically calls the draw method of each gameObject
         }
 
         for (GameObject a: aliveList){
@@ -134,7 +131,7 @@ public class TheGameItself extends BasicGame {
 
     protected void uLostLol(){
         gameOver = true;
-        JOptionPane.showMessageDialog(null,"Ron \"Ron Paul\" Paul can still win!");
+        highscores.recordHighScore(survivedFor);
         thisIsGettingVerySilly();
     }
 

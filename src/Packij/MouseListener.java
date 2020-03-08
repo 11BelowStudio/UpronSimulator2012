@@ -22,20 +22,8 @@ public class MouseListener extends MouseInputAdapter {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        //yeah basically nothing happens for this
-        if (isLeftMouseButton(e)){
-            //if something is left-clicked
-            //Object sourceObject = e.getSource();
-            if (e.getSource() instanceof BasicView){
-                System.out.println("ayy lmao");
-                ((BasicView)e.getSource()).clicked(e.getPoint());
-            }
-
-
-
-        } else if (isRightMouseButton(e)){
-
-
+        if (e.getSource() instanceof BasicView){
+            ((BasicView)e.getSource()).clicked(e.getPoint());
         }
     }
 

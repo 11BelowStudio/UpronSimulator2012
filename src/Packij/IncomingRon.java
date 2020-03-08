@@ -74,10 +74,7 @@ public class IncomingRon extends GameObject {
     }
 
 
-    /*
-    public void update(){
 
-    }*/
 
     public void braved(){
         dead = true;

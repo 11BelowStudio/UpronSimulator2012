@@ -23,9 +23,15 @@ public class Snoo extends GameObject implements Ronnable {
 
     String karmaString;
 
+    String soBrave;
+
+    String itsHappening;
+
     Rectangle hitBounds;
 
     Area currentArea;
+
+    private final Font epicFont = new Font("Impact", Font.BOLD,40);
 
 
     public Snoo(){
@@ -47,6 +53,10 @@ public class Snoo extends GameObject implements Ronnable {
         //health = 128;
 
         img = SNOO;
+
+        soBrave = "So Brave!";
+
+        itsHappening = "It's Happening!";
 
         System.out.println("snoo made");
 
@@ -86,10 +96,7 @@ public class Snoo extends GameObject implements Ronnable {
     }
 
     private void updateArea(){
-        if (karma > 0) {
-            hitArea = new Area(new Ellipse2D.Double(position.x - karma, position.y - karma, 2 * karma, 2 * karma));
-        } else{
-            hitArea = new Area(new Ellipse2D.Double(position.x - 1, position.y - 1, 2, 2));
+        if (karma < 1) {
             dead = true;
         }
         hitBounds = hitArea.getBounds();
@@ -113,11 +120,32 @@ public class Snoo extends GameObject implements Ronnable {
         //g.fillOval
         g.drawImage(img,-karma,-karma,2* karma,2* karma,null);
 
+        hitArea = new Area(new Ellipse2D.Double(position.x-karma,position.y-karma,2*karma, 2*karma));
+        hitBounds = hitArea.getBounds();
+
         FontMetrics metrics = g.getFontMetrics(Constants.sans);
+        g.setColor(Color.white);
         int w = metrics.stringWidth(karmaString);
         int h = metrics.getHeight();
-        g.setColor(Color.white);
         g.drawString(karmaString,0-(w/2),karma+h);
+
+
+        if (karma > 150){
+            g.setFont(epicFont);
+            g.setColor(Color.BLACK);
+            metrics = g.getFontMetrics(epicFont);
+            if (karma > 200){
+                w = metrics.stringWidth(itsHappening);
+                h = metrics.getHeight();
+                g.drawString(itsHappening,-(w/2),-(h/2));
+            } else{
+                w = metrics.stringWidth(soBrave);
+                h = metrics.getHeight();
+                g.drawString(soBrave,-(w/2),-(h/2));
+            }
+            g.setFont(sans);
+        }
+
         g.setTransform(at);
         /*
         g.fill(hitBounds);

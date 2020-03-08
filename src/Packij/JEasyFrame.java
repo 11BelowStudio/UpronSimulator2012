@@ -10,12 +10,16 @@ public class JEasyFrame extends JFrame {
 
     private BasicGame game;
 
+    private HighScoreHandler highScores;
+
+
 
 
     public JEasyFrame(BasicView view, String title) throws InterruptedException {
         super(title);
         this.view = view;
         this.game = view.getGame();
+        this.highScores = new HighScoreHandler(this);
         getContentPane().add(BorderLayout.CENTER, view);
         //view.addMouseListener(new MouseClickListener());
         pack();
@@ -27,6 +31,7 @@ public class JEasyFrame extends JFrame {
     }
 
     public void mainLoop() throws InterruptedException {
+        boolean firstOne = true;
         while (true) {
             Timer repaintTimer = new Timer(Constants.DELAY, ev -> view.repaint());
             repaintTimer.start();
@@ -53,8 +58,23 @@ public class JEasyFrame extends JFrame {
                 view.changeGame(new Intro());
                 game = view.getGame();*/
                 isIntro = changeGame(isIntro);
-
                 repaintTimer.start();
+                if (firstOne){
+                    firstOne = false;
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "ok so basically defend the Ron \"Ron Paul\" Paul\n"
+                                    +"presidential campaign headquarters\n"
+                                    +"(aka the website known as reddit dot com)\n"
+                                    +"from all the unbrave downronners who arent brave.\n\n"
+                                    +"Your job is to use your BraveryStick (So Brave)\n"
+                                    +"to hit the downrons (the blue ones) away from us\n"
+                                    +"whilst allowing the uprons (the orange ones) through.\n\n\n"
+                                    +"We *will* get Ron \"Ron Paul\" Paul into the white house!",
+                            "ur job",
+                            JOptionPane.PLAIN_MESSAGE
+                    );
+                }
 
             }
 
@@ -63,7 +83,7 @@ public class JEasyFrame extends JFrame {
 
     private boolean changeGame(boolean isIntro){
         if (isIntro) {
-            view.changeGame(new TheGameItself());
+            view.changeGame(new TheGameItself(highScores));
             game = view.getGame();
             isIntro = false;
             System.out.println("intro over");
