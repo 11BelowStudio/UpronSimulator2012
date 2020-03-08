@@ -79,7 +79,7 @@ public class BraveryStick extends GameObject implements Ronnable {
     }
 
     @Override
-    public boolean ronned(IncomingRon ron) {
+    public boolean ron(IncomingRon ron) {
         if (hitBounds.intersects(ron.getBounds())){
             Area temp = hitArea;
             temp.intersect(ron.getArea());

@@ -10,17 +10,17 @@ import static Packij.Constants.*;
 
 public class IncomingRon extends GameObject {
 
-    int karmaValue;
+    int karma;
 
 
-    private boolean xIntersect;
-    private boolean yIntersect;
+    //private boolean xIntersect;
+    //private boolean yIntersect;
 
 
     private Rectangle hitBounds;
 
 
-    IncomingRon() {
+    IncomingRon() { //it's either going to be an upron or a downron
         super();
         objRect = new Rectangle(-16,-16,32,32);
 
@@ -38,8 +38,8 @@ public class IncomingRon extends GameObject {
         position = p;
         dead = false;
 
-        xIntersect = (position.x > HALF_WIDTH);
-        yIntersect = (position.y > HALF_HEIGHT);
+        //xIntersect = (position.x > HALF_WIDTH);
+        //yIntersect = (position.y > HALF_HEIGHT);
 
         velocity = Vector2D.polar(angle,Math.random()*MAX_SPEED+100);
 
@@ -49,14 +49,14 @@ public class IncomingRon extends GameObject {
         hitArea = new Area(objRect);
         hitBounds = hitArea.getBounds();
 
-        karmaValue = (int)(Math.random() * 32)+1;
+        karma = (int)(Math.random() * 32)+1;
 
         if (Math.random() > 0.5){
             img = UPRON;
 
         } else{
             img = DOWNRON;
-            karmaValue *= -1;
+            karma *= -1;
         }
     }
 
@@ -90,6 +90,10 @@ public class IncomingRon extends GameObject {
 
     Area getArea(){
         return hitArea;
+    }
+
+    int getKarma(){
+        return this.karma;
     }
 
 }

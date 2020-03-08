@@ -133,12 +133,12 @@ public class Snoo extends GameObject implements Ronnable {
     }
 
     @Override
-    public boolean ronned(IncomingRon ron) {
+    public boolean ron(IncomingRon ron) {
         if (hitBounds.intersects(ron.getBounds())){
             Area temp = hitArea;
             temp.intersect(ron.getArea());
             if (!temp.isEmpty()){
-                updateKarma(ron.karmaValue);
+                updateKarma(ron.getKarma());
                 ron.braved();
                 return true;
             }

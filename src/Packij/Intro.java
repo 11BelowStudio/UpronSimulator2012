@@ -39,6 +39,10 @@ public class Intro extends BasicGame {
                 "One thing you can do to save him.",
                 "",
                 "",
+                "",
+                "",
+                "",
+                "",
                 "Uprons to the left."
         };
 

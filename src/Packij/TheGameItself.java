@@ -72,7 +72,7 @@ public class TheGameItself extends BasicGame {
 
         for (GameObject a: aliveList){
             if (a instanceof IncomingRon){
-                if (snoo.ronned((IncomingRon) a) || braveryStick.ronned((IncomingRon) a)){
+                if (snoo.ron((IncomingRon) a) || braveryStick.ron((IncomingRon) a)){
                     a.dead = true;
                 }
             }
