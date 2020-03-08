@@ -1,4 +1,4 @@
-#le readme has arrived
+#le readme has arrived#
 
 aight ok so basically this was for a game jam in march 2020
 
@@ -12,19 +12,20 @@ yes you need a mouse to play this game,
 no it does not support fullscreen,
 and yes it is absolute shite.
 
-##CREDITS
+#CREDITS#
 
-##code stuff
+##code stuff##
 
 * code and such: me
 * sample code: provided by Dr Dimitri Ognibene
 * utilities/FontsWhatIHave.java: pretty much unceremoniously nicked from http://www.java2s.com/Tutorial/Java/0261__2D-Graphics/Togetallavailablefontsinyoursystem.htm
 
-##not code stuff
+##not code stuff##
+
 * Ron "Ron Paul" Paul: himself
 * snoo.png, upvote.png, downvote.png: reddit
 * BraveryStick.png, BraveryStickFlipped.png: me (made with ms paint)
 
-##stuff
+##stuff##
 
 * im stuff
