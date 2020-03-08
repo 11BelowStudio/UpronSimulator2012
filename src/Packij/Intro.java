@@ -157,7 +157,6 @@ public class Intro extends BasicGame {
 
         if (objectList.isEmpty()){
             uLostLol();
-            System.out.println("aight credits are over now");
         }
 
 

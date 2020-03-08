@@ -47,8 +47,6 @@ class BraveFrame extends JFrame {
             }
             repaintTimer.stop();
 
-            System.out.println("changing");
-
             /*
             view.changeGame(new Intro());
             game = view.getGame();*/
@@ -80,12 +78,10 @@ class BraveFrame extends JFrame {
             view.changeGame(new TheGameItself(highScores));
             game = view.getGame();
             isIntro = false;
-            System.out.println("intro over");
         } else{
             view.changeGame(new Intro());
             game = view.getGame();
             isIntro = true;
-            System.out.println("game over, replaying intro");
         }
         return isIntro;
     }
