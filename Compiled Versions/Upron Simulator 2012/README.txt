@@ -1,3 +1,7 @@
+Please keep the 'lookAtTheseNerdsLmao' folder in the same folder as the JAR file, otherwise this game will not work.
+
+The git repo for this game is here: https://github.com/IDontHaveAnyClueWhatToPutHere/UpronSimulator2012
+
 # le readme has arrived
 
 aight ok so basically this was for a game jam in march 2020
@@ -12,15 +16,13 @@ yes you need a mouse to play this game,
 no it does not support fullscreen,
 and yes it is absolute shite.
 
-If you want a compiled version to play, look at the 'Compiled Versions' folder for a JAR file version.
-
 # CREDITS
 
 ## code stuff
 
 * code and such: me
 * sample code: provided by Dr Dimitri Ognibene
-* Information about getting resources from a static context (helped with getting the JAR file done): JB Nizet on Stack Overflow (https://stackoverflow.com/a/8362018)
+* Information about getting resources from a static context: JB Nizet on Stack Overflow (https://stackoverflow.com/a/8362018)
 * utilities/FontsWhatIHave.java: pretty much unceremoniously nicked from http://www.java2s.com/Tutorial/Java/0261__2D-Graphics/Togetallavailablefontsinyoursystem.htm
 
 ## not code stuff
